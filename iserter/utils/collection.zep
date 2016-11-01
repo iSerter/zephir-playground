@@ -6,7 +6,7 @@ namespace Iserter\Utils;
  * @author Ilyas Serter <info@ilyasserter.com>
  * @date 01.11.2016
  */
-class Collection implements \ArrayAccess, \Iterator
+class Collection implements \ArrayAccess, \Iterator, \JsonSerializable
 {
 
     protected _count;
@@ -14,8 +14,14 @@ class Collection implements \ArrayAccess, \Iterator
     protected _pointer = 0;
 
     public function __construct(array data = []) {
-        let this->_data = data;
-        let this->_count = count(data);
+
+        if(count(data) > 0) {
+                var item;
+                for item in data {
+                    this->push(item);
+                }
+        }
+
     }
 
     /*
@@ -27,6 +33,13 @@ class Collection implements \ArrayAccess, \Iterator
     public function count() -> int
     {
         return this->_count;
+    }
+
+
+    public function prepend(item) -> void
+    {
+        array_unshift(this->_data,item);
+        let this->_count++;
     }
 
     public function push(item) -> void
@@ -43,6 +56,24 @@ class Collection implements \ArrayAccess, \Iterator
     public function pop() {
         let this->_count--;
         return array_pop(this->_data);
+    }
+
+    public function toJson() -> string
+    {
+        return json_encode(this->_data);
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | JsonSerializable
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    public function jsonSerialize() -> array
+    {
+        return this->_data;
     }
 
     /*
