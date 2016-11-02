@@ -48,12 +48,14 @@ class Collection implements \ArrayAccess, \Iterator, \JsonSerializable
         let this->_count++;
     }
 
-    public function pull() {
+    public function pull()
+    {
         let this->_count--;
         return array_shift(this->_data);
     }
 
-    public function pop() {
+    public function pop()
+    {
         let this->_count--;
         return array_pop(this->_data);
     }
@@ -62,7 +64,6 @@ class Collection implements \ArrayAccess, \Iterator, \JsonSerializable
     {
         return json_encode(this->_data);
     }
-
 
     /*
     |--------------------------------------------------------------------------

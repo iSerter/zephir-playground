@@ -1,8 +1,12 @@
 <?php
 
-$test = new Iserter\Test;
+$str = new Iserter\Utils\Str('hello world 5');
 
-$test->hello() . PHP_EOL;
+var_dump($str->length());
+var_dump($str->slice(4,3),$str->slice(0,5));
+var_dump($str->endsWith(' 5'),$str->endsWith('world'),$str->endsWith('0'));
+var_dump($str->contains('wor'),$str->contains('o'),$str->contains(5),$str->contains(2));
+exit;
 
 $collection = new Iserter\Utils\Collection(['asd',6,2,6,2,6]);
 
